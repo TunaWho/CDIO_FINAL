@@ -20,6 +20,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    protected $namespace = 'App\Http\Controllers';
+
     public const HOME = '/';
 
     /**
@@ -59,27 +61,27 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::name('customer.')
+        Route::as('customer.')
             ->middleware('web')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Customer')
             ->group(base_path('routes/web.php'));
     }
 
     protected function mapPartNerRoutes()
     {
         Route::prefix('partners')
-            ->name('partner.')
+            ->as('partner.')
             ->middleware('web')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Partner')
             ->group(base_path('routes/web_partner.php'));
     }
 
     protected function mapAdminRoutes()
     {
         Route::prefix('admin')
-            ->name('admin.')
+            ->as('admin.')
             ->middleware('web')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
 

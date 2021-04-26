@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login_form');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register_form');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@resetPassword')->name('password.update');
+
+Route::group(['middleware' => ['auth.partner']], function () {
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 });
