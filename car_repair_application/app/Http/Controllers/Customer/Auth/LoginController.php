@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('customer.auth.login');
     }
 
     /**
@@ -94,7 +94,8 @@ class LoginController extends Controller
         $this->guard()->logout();
 
         $request->session()->invalidate();
+        $response = $this->loggedOut($request);
 
-        return redirect(route('customer.login'));
+        return $response ? $response : redirect(route('customer.login'));
     }
 }

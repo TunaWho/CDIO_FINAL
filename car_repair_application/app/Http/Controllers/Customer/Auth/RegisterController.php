@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Customer\Auth;
 use Hash;
 use Validator;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -33,7 +33,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('customer.auth.register');
     }
 
     /**
@@ -59,9 +59,14 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
             'role_id' => \App\Enums\UserRole::USER,
         ]);
+    }
+
+    protected function guard()
+    {
+        return auth()->guard('customer');
     }
 
     protected function redirectTo()

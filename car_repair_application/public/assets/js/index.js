@@ -1,62 +1,111 @@
-const barIcon = document.getElementById("menu-icon");
-const header = document.querySelector(".header-right");
-const itemServiceIcons = document.querySelectorAll(".item-service i");
-const serviceSelectedWrap = document.querySelector(".services-selected");
-const div = document.createElement("div");
+const barIcon = document.getElementById("menu-icon")
+const header = document.querySelector(".header-right")
+const itemServiceIcons = document.querySelectorAll('.item-service i')
+const serviceSelectedWrap = document.querySelector('.services-selected')
+const submitServiceBtn = document.getElementById('submit-service');
+const addServiceBtn = document.getElementById('add-service-btn');
+const authLinks = document.querySelectorAll('a[href*="sign"]');
+
+const div = document.createElement('div');
 const textNode = document.createTextNode("Chưa có dịch vụ nào được chọn");
 div.appendChild(textNode);
 
-const countServiceSelected = () => {
-    const countServiceSelected = document.querySelectorAll(
-        ".services-selected input"
-    ).length;
-    if (!countServiceSelected) {
-        serviceSelectedWrap.appendChild(div);
-        return;
-    }
-    serviceSelectedWrap.removeChild(div);
-};
+const auth = localStorage.getItem('auth') ? JSON.stringify(localStorage.getItem('auth')) : null;
 
-function onClickItemServiceIcon() {
-    const serviceName = this.previousElementSibling.textContent;
-    const newServiceSelected = document.createElement("input");
-    const div = document.querySelector(".services-selected div");
-
-    newServiceSelected.setAttribute("value", serviceName);
-    newServiceSelected.setAttribute("class", "form-control");
-    newServiceSelected.setAttribute("name", "name[]");
-    serviceSelectedWrap.appendChild(newServiceSelected);
-
-    if (div) {
-        countServiceSelected();
-    }
+const state = {
+	service_name: [],
+	auth: auth || null
 }
 
-(() => {
-    countServiceSelected();
+const countServiceSelected = () => {
+	const countServiceSelected = document.querySelectorAll('.services-selected li').length;
+	if (!countServiceSelected) {
+		serviceSelectedWrap.appendChild(div)
+		return;
+	}
+	serviceSelectedWrap.removeChild(div)
+}
+
+const handleSubmit = (e) => {
+	e.preventDefault();
+}
+
+const handleOrderService = (serviceName) => {
+	const newServiceSelected = document.createElement('li');
+
+	newServiceSelected.textContent = serviceName;
+	serviceSelectedWrap.appendChild(newServiceSelected);
+	newServiceSelected.setAttribute('class', 'ml-4');
+
+	state.service_name.push(serviceName);
+}
+
+const handleAddNewService = () => {
+	const newServiceInput = document.querySelector('.other-sevice-input');
+	const newServiceName = newServiceInput.value;
+
+	if (!newServiceName) return;
+
+	handleOrderService(newServiceName)
+	newServiceInput.value = '';
+}
+
+
+
+function onClickItemServiceIcon() {
+	const serviceName = this.previousElementSibling.textContent;
+	const isOtherService = this.parentElement.id === 'item-service-other';
+	const div = document.querySelector('.services-selected div');
+
+	if (isOtherService) {
+		const newServiceInput = document.querySelector('.other-sevice-input');
+		const btn = document.createElement('button');
+		newServiceInput.classList.add('show');
+		return;
+	}
+
+	handleOrderService(serviceName);
+
+	if (div) {
+		countServiceSelected();
+	}
+}
+
+; (() => {
+	countServiceSelected()
+	submitServiceBtn.addEventListener('click', handleSubmit);
+	addServiceBtn.addEventListener('click', handleAddNewService);
 })();
 
-window.onscroll = function(e) {
-    if (window.scrollY > 34) {
-        barIcon.classList.add("background-dark");
-        return;
-    }
 
-    barIcon.classList.remove("background-dark");
+window.onscroll = function (e) {
+	if (window.scrollY > 34) {
+		barIcon.classList.add("background-dark");
+		return
+	}
+
+	barIcon.classList.remove("background-dark");
 };
+
+window.onload = () => {
+	if (state.auth) {
+		console.log(state);
+		authLinks.forEach(link => link.setAttribute('class', 'auth-link-hidden'))
+	} else {
+		authLinks.forEach(link => link.classList.remove('auth-link-hidden'));
+	}
+}
 
 const onClickMenuBar = () => {
-    const classNameOfHeader = header.getAttribute("class");
+	const classNameOfHeader = header.getAttribute("class");
 
-    if (classNameOfHeader.includes("show")) {
-        header.classList.remove("show");
-        return;
-    }
+	if (classNameOfHeader.includes('show')) {
+		header.classList.remove("show")
+		return;
+	}
 
-    header.classList.add("show");
-};
+	header.classList.add("show")
+}
 
-barIcon.addEventListener("click", onClickMenuBar);
-itemServiceIcons.forEach(icon =>
-    icon.addEventListener("click", onClickItemServiceIcon)
-);
+barIcon.addEventListener('click', onClickMenuBar)
+itemServiceIcons.forEach(icon => icon.addEventListener('click', onClickItemServiceIcon))

@@ -69,6 +69,7 @@ class LoginController extends Controller
 
                 return $this->sendFailedLoginResponse($request);
             }
+
             return $this->sendLoginResponse($request);
         }
 
@@ -95,7 +96,8 @@ class LoginController extends Controller
         $this->guard()->logout();
 
         $request->session()->invalidate();
+        $response = $this->loggedOut($request);
 
-        return $this->loggedOut($request) ?: redirect(route('partner.login'));
+        return $response ? $response : redirect(route('partner.login'));
     }
 }

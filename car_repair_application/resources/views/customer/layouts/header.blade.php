@@ -1,19 +1,28 @@
-<div class="header d-flex align-items-center justify-content-between p-2">
+<div class="header d-flex align-items-center justify-content-between" style="padding: 0px 2.6rem;">
     <a href="#default" class="logo">SỬA XE 24H</a>
-    <div class="header-right">
-        <img id="menu-icon" src="./images/menu.svg" />
-        <a class="active" href="#home">Trang chủ</a>
+    <div class="header-right d-flex">
+        <img id="menu-icon" src="./images/menu.svg">
+        <a href="{{ route('customer.dashboard') }}">Trang chủ</a>
         <a href="#contact">Giới thiệu</a>
         <a href="#about">Tin tức</a>
         <a href="#about">Liên hệ</a>
-        <a href="/user-update.html">Tài khoản</a>
-        <a href="/sign-up.html">Đăng nhập</a>
-        <a href="/sign-in.html">Đăng ký</a>
+        @guest('customer')
+        <a href="{{ route('customer.login') }}">Đăng nhập</a>
+        @endguest
         @auth('customer')
-        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-        <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ auth()->guard('customer')->user()->name }}
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Trạng thái</a>
+                    <a class="dropdown-item" href="/user-update.html">Thông tin</a>
+                    <a class="dropdown-item" href="#">Cài đặt</a>
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </div>
         @endauth
     </div>
 </div>

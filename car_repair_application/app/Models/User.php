@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -56,5 +57,10 @@ class User extends Authenticatable
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'user_id', 'id');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

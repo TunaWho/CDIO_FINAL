@@ -1,340 +1,83 @@
-@extends('partner.layouts.app') 
+@extends('partner.layouts.app')
+
 @push('css')
-<link
-    rel="stylesheet"
-    type="text/css"
-    href="{{ asset('assets/css/report.css') }}"
-/>
-@endpush 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/accept.css') }}" />
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+@endpush
+
 @section('content')
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Email Statistics</h4>
-                        <p class="category">Last Campaign Performance</p>
-                    </div>
-                    <div class="content">
-                        <div
-                            id="chartPreferences"
-                            class="ct-chart ct-perfect-fourth"
-                        ></div>
-
-                        <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> Open
-                                <i class="fa fa-circle text-danger"></i>
-                                Bounce
-                                <i class="fa fa-circle text-warning"></i>
-                                Unsubscribe
-                            </div>
-                            <hr />
-                            <div class="stats">
-                                <i class="fa fa-clock-o"></i> Campaign sent
-                                2 days ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Users Behavior</h4>
-                        <p class="category">24 Hours performance</p>
-                    </div>
-                    <div class="content">
-                        <div id="chartHours" class="ct-chart"></div>
-                        <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> Open
-                                <i class="fa fa-circle text-danger"></i>
-                                Click
-                                <i class="fa fa-circle text-warning"></i>
-                                Click Second Time
-                            </div>
-                            <hr />
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3
-                                minutes ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <form method="POST" action="">
+        <div class="col-md-12 bg-info">
+            <div class="form-group" style="padding-top: 1.5rem">
+                <label>Activity: </label>
+                <input id='getStatus' type="checkbox" data-size="md" checked data-toggle="toggle" name="status" data-onstyle="info">
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card ">
-                    <div class="header">
-                        <h4 class="title">2014 Sales</h4>
-                        <p class="category">All products including Taxes</p>
-                    </div>
-                    <div class="content">
-                        <div id="chartActivity" class="ct-chart"></div>
-
-                        <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> Tesla
-                                Model S
-                                <i class="fa fa-circle text-danger"></i> BMW
-                                5 Series
-                            </div>
-                            <hr />
-                            <div class="stats">
-                                <i class="fa fa-check"></i> Data information
-                                certified
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card ">
-                    <div class="header">
-                        <h4 class="title">Tasks</h4>
-                        <p class="category">Backend development</p>
-                    </div>
-                    <div class="content">
-                        <div class="table-full-width">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input
-                                                    id="checkbox1"
-                                                    type="checkbox"
-                                                />
-                                                <label
-                                                    for="checkbox1"
-                                                ></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Sign contract for "What are
-                                            conference organizers afraid
-                                            of?"
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Edit Task"
-                                                class="btn btn-info btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Remove"
-                                                class="btn btn-danger btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input
-                                                    id="checkbox2"
-                                                    type="checkbox"
-                                                    checked
-                                                />
-                                                <label
-                                                    for="checkbox2"
-                                                ></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Lines From Great Russian
-                                            Literature? Or E-mails From My
-                                            Boss?
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Edit Task"
-                                                class="btn btn-info btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Remove"
-                                                class="btn btn-danger btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input
-                                                    id="checkbox3"
-                                                    type="checkbox"
-                                                />
-                                                <label
-                                                    for="checkbox3"
-                                                ></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Flooded: One year later,
-                                            assessing what was lost and what
-                                            was found when a ravaging rain
-                                            swept through metro Detroit
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Edit Task"
-                                                class="btn btn-info btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Remove"
-                                                class="btn btn-danger btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input
-                                                    id="checkbox4"
-                                                    type="checkbox"
-                                                    checked
-                                                />
-                                                <label
-                                                    for="checkbox4"
-                                                ></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Create 4 Invisible User
-                                            Experiences you Never Knew About
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Edit Task"
-                                                class="btn btn-info btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Remove"
-                                                class="btn btn-danger btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input
-                                                    id="checkbox5"
-                                                    type="checkbox"
-                                                />
-                                                <label
-                                                    for="checkbox5"
-                                                ></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Read "Following makes Medium
-                                            better"
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Edit Task"
-                                                class="btn btn-info btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Remove"
-                                                class="btn btn-danger btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input
-                                                    id="checkbox6"
-                                                    type="checkbox"
-                                                    checked
-                                                />
-                                                <label
-                                                    for="checkbox6"
-                                                ></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Unfollow 5 enemies from twitter
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Edit Task"
-                                                class="btn btn-info btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                rel="tooltip"
-                                                title="Remove"
-                                                class="btn btn-danger btn-simple btn-xs"
-                                            >
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3
-                                minutes ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </form>
+    <table id="customers">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã dịch vụ</th>
+                <th>Tên dịch vụ</th>
+                <th>Địa điểm</th>
+                <th>Tên khách hàng</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>ST01</td>
+                <td>Vá xe</td>
+                <td>25 Hùng Vương</td>
+                <td>Dũng</td>
+                <td>20000</td>
+                <td>
+                    <button class="clearfix" style="padding: 20px" type="button"
+                        onclick="window.location.href='service.html'" class="cancelbtn">Nhận đơn</button>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>ST01</td>
+                <td>Vá xe</td>
+                <td>25 Hùng Vương</td>
+                <td>Dũng</td>
+                <td>20000</td>
+                <td>
+                    <button class="clearfix" style="padding: 20px" type="button"
+                        onclick="window.location.href='service.html'" class="cancelbtn">Nhận đơn</button>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>ST01</td>
+                <td>Vá xe</td>
+                <td>25 Hùng Vương</td>
+                <td>Dũng</td>
+                <td>20000</td>
+                <td>
+                    <button class="clearfix" style="padding: 20px" type="button"
+                        onclick="window.location.href='service.html'" class="cancelbtn">Nhận đơn</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script>
+          $(function() {
+            $('#getStatus').change(function() {
+                if($(this).prop('checked') !== true){
+                    $('#customers tbody').hide();
+                } else {
+                    $('#customers tbody').show();
+                }
+            });
+        });
+    </script>
+@endpush
