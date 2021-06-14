@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -14,14 +14,15 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
 
     /**
      * The path to the "home" route for your application.
      *
      * @var string
      */
-    public const HOME = '/home';
+    protected $namespace = 'App\Http\Controllers';
+
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -31,7 +32,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
         parent::boot();
     }
 
@@ -46,6 +46,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapPartNerRoutes();
+
+        $this->mapAdminRoutes();
         //
     }
 
@@ -58,9 +61,28 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-            ->namespace($this->namespace)
+        Route::as('customer.')
+            ->middleware('web')
+            ->namespace($this->namespace . '\Customer')
             ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapPartNerRoutes()
+    {
+        Route::prefix('partners')
+            ->as('partner.')
+            ->middleware('web')
+            ->namespace($this->namespace . '\Partner')
+            ->group(base_path('routes/web_partner.php'));
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::prefix('admin')
+            ->as('admin.')
+            ->middleware('web')
+            ->namespace($this->namespace . '\Admin')
+            ->group(base_path('routes/admin.php'));
     }
 
     /**

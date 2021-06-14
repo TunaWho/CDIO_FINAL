@@ -1,0 +1,87 @@
+footer {
+    background: #f2f2f2 url(../images/footer_bg.png) top center no-repeat;
+    background-size: 100%;
+    padding-top: 25px;
+    position: relative;
+}
+
+footer .wrapper {
+    position: relative;
+}
+
+.wrapper {
+    margin: 0 auto;
+}
+
+footer .footertop {
+    height: 160px;
+}
+
+footer .footermenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer .footermenu::before {
+    display: table;
+    content: " ";
+}
+
+footer .footermenu::after {
+    display: table;
+    content: " ";
+}
+
+footer .footermenu li {
+    width: 160px;
+    margin-right: 20px;
+    float: left;
+}
+
+.footerinfo {
+    width: 340px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.footerinfo .text-red {
+    color: #df2431;
+}
+
+.footerinfo h3 {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.footerinfo p {
+    color: #818181;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.footerinfo p.hotline {
+    margin-bottom: 0;
+}
+
+.footerinfo p {
+    color: #818181;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.footerinfo .hotline a {
+    font-size: 22px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.footerinfo .text-red {
+    color: #df2431;
+}
