@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Dashboard</a>
+            <a class="navbar-brand" href="#">@yield('title')</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
@@ -56,7 +56,7 @@
                         <li><a href="{{ route('partner.topup') }}">NẠP TIỀN</a></li>
                         <li>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ĐĂNG XUẤT</a>
-                            <form id="logout-form" action="{{ route('partner.logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ !empty(auth('admin')->id()) ? route('admin.logout') : route('partner.logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </li>

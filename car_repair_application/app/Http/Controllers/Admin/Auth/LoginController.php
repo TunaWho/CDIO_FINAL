@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('admin.auth.login');
     }
 
     /**
@@ -64,7 +64,7 @@ class LoginController extends Controller
         }
         if ($this->attemptLogin($request)) {
 
-            if ($this->guard()->user()['role'] !== (\App\Enums\UserRole::ADMIN)) {
+            if ($this->guard()->user()['role_id'] !== (\App\Enums\UserRole::ADMIN)) {
                 $this->guard()->logout();
 
                 $request->session()->invalidate();
@@ -98,6 +98,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect(route('agency.login'));
+        return $this->loggedOut($request) ?: redirect(route('admin.login'));
     }
 }

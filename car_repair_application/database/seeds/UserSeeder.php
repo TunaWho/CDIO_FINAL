@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -38,6 +39,12 @@ class UserSeeder extends Seeder
         //     'created_at' => Carbon::now(),
         //     'updated_at' => Carbon::now(),
         // ]))->save();
-        $partner = new \App\Models\partner();
+        Admin::create([
+            'name' => 'Admin',
+            'account_number' => 123456789,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'user_id' => 1
+        ]);
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcceptRequest extends Model
 {
+    protected $table = 'accepts';
+
     protected $fillable = [
         'send_request_id', 'accept', 'partner_id'
     ];

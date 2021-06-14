@@ -559,6 +559,12 @@ input:focus {
     border-color: #777777;
 }
 
+.btn-custom:hover {
+    background-color: #4caf50b5!important;
+    color: #000000!important;
+    border-color: #777777!important;
+}
+
 .btn.disabled, .btn.disabled:hover, .btn.disabled:focus, .btn.disabled.focus, .btn.disabled:active, .btn.disabled.active, .btn:disabled, .btn:disabled:hover, .btn:disabled:focus, .btn:disabled.focus, .btn:disabled:active, .btn:disabled.active, .btn[disabled], .btn[disabled]:hover, .btn[disabled]:focus, .btn[disabled].focus, .btn[disabled]:active, .btn[disabled].active,
 fieldset[disabled] .btn,
 fieldset[disabled] .btn:hover,

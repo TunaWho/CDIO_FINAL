@@ -29,6 +29,7 @@
 
 <div class="main-panel">
     @include('partner.layouts.header')
+    @include('partner.layouts.partials.notice')
     @yield('content')
     @include('partner.layouts.footer')
 </div>
@@ -40,7 +41,7 @@
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <!--  Charts Plugin -->
 <script src="{{ asset('assets/js/light-bootstrap-dashboard.js') }}"></script>
-{{-- <script src="{{ asset('assets/js/demo.js') }}"></script> --}}
+<script src="{{ asset('assets/js/demo.js') }}"></script>
 <script>
     $.ajaxSetup({
         headers: {

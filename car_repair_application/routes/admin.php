@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login_form');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+
+Route::group(['middleware' => ['auth.admin']], function () {
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::delete('/dashboard', 'DashboardController@acceptTopup')->name('accept.topup');
 });

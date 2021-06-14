@@ -24,11 +24,14 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 Route::group(['middleware' => ['auth.partner']], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::post('/dashboard', 'DashboardController@acceptRequest')->name('accept.request');
     Route::get('/statistics', 'StatisticController@index')->name('statistic');
-    Route::get('/services', 'RepairServiceController@index')->name('service');
+    Route::resource('/services', 'ServiceRepairController');
     Route::get('/users-payment', 'PaymentController@index')->name('invoice');
     Route::get('/topups', 'TopupController@index')->name('topup');
+    Route::post('/topups', 'TopupController@topup')->name('topup');
     Route::resource('settings', 'ProfileController');
     Route::post('settings', 'ProfileController@districtByProvince')->name('get_district');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::resource('services-type', 'ServiceRepairController');
 });

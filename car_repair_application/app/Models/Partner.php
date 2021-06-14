@@ -43,4 +43,9 @@ class Partner extends Model
     {
         return $this->hasMany(Rate::class, 'partner_id', 'id');
     }
+
+    public function service()
+    {
+        return $this->hasMany(Service::class, 'partner_id', 'id');
+    }
 }

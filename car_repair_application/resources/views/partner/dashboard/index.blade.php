@@ -17,7 +17,6 @@
     <table id="customers">
         <thead>
             <tr>
-                <th>STT</th>
                 <th>Mã dịch vụ</th>
                 <th>Tên dịch vụ</th>
                 <th>Địa điểm</th>
@@ -27,42 +26,24 @@
             </tr>
         </thead>
         <tbody>
+            @forelse ($lists as $service)
             <tr>
-                <td>1</td>
-                <td>ST01</td>
-                <td>Vá xe</td>
-                <td>25 Hùng Vương</td>
-                <td>Dũng</td>
-                <td>20000</td>
+                <td>{{ $service->id }}</td>
+                <td>{{ $service->service_name }}</td>
+                <td>{{ $service->address }}</td>
+                <td>{{ $service->customer->name }}</td>
+                <td>{{ number_format($service->total) }}</td>
                 <td>
-                    <button class="clearfix" style="padding: 20px" type="button"
-                        onclick="window.location.href='service.html'" class="cancelbtn">Nhận đơn</button>
+                    {!! Form::open(['method'=>'post', 'route'=>['partner.accept.request', 'accept' => $service->id]]) !!}
+                    {!! Form::button('Nhận đơn', ['type' => 'submit', 'class' => 'btn btn-custom clearfix', 'style' => 'padding: 10px;']) !!}
+                    {!! Form::close() !!}
                 </td>
             </tr>
+            @empty
             <tr>
-                <td>1</td>
-                <td>ST01</td>
-                <td>Vá xe</td>
-                <td>25 Hùng Vương</td>
-                <td>Dũng</td>
-                <td>20000</td>
-                <td>
-                    <button class="clearfix" style="padding: 20px" type="button"
-                        onclick="window.location.href='service.html'" class="cancelbtn">Nhận đơn</button>
-                </td>
+                <td colspan="5" class="text-center">{{ __('messages.no_record') }}</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>ST01</td>
-                <td>Vá xe</td>
-                <td>25 Hùng Vương</td>
-                <td>Dũng</td>
-                <td>20000</td>
-                <td>
-                    <button class="clearfix" style="padding: 20px" type="button"
-                        onclick="window.location.href='service.html'" class="cancelbtn">Nhận đơn</button>
-                </td>
-            </tr>
+            @endforelse
         </tbody>
     </table>
 @endsection

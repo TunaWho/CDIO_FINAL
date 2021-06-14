@@ -23,9 +23,12 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
+Route::post('dashboard', 'DashboardController@districtByProvince')->name('get_district');
+Route::post('search-result', 'DashboardController@searchAdvance')->name('search');
 
 Route::group(['middleware' => ['auth.customer']], function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-    Route::get('detail', 'DetailController@index')->name('detail');
+    Route::get('detail/{user}/partners', 'DetailController@index')->name('detail');
+    Route::post('detail/{user}/partners', 'DetailController@sendRequest')->name('detail.sendRequest');
+    Route::resource('invoices', 'InvoiceController');
 });

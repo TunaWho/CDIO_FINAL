@@ -14,10 +14,10 @@
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ auth()->guard('customer')->user()->name }}
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Trạng thái</a>
-                    <a class="dropdown-item" href="/user-update.html">Thông tin</a>
-                    <a class="dropdown-item" href="#">Cài đặt</a>
-                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <a class="dropdown-item" href="#" style="color: #212529!important;">Trạng thái</a>
+                    <a class="dropdown-item" href="/user-update.html" style="color: #212529!important;">Thông tin</a>
+                    <a class="dropdown-item" href="#" style="color: #212529!important;">Cài đặt</a>
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: #212529!important;">Logout</a>
                     <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>

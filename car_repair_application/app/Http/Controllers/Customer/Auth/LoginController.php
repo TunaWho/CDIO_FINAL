@@ -61,6 +61,7 @@ class LoginController extends Controller
             $this->fireLockoutEvent($request);
         }
         if ($this->attemptLogin($request)) {
+            
             if ($this->guard()->user()['role_id'] !== (\App\Enums\UserRole::USER)) {
                 $this->guard()->logout();
 

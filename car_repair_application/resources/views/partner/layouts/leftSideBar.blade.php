@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('partner.service') }}">
+                <a href="{{ route('partner.services.index') }}">
                     <i class="pe-7s-news-paper"></i>
                     <p>QUẢN LÝ DỊCH VỤ</p>
                 </a>

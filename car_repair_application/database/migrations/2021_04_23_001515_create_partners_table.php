@@ -15,12 +15,9 @@ class CreatePartnersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('address')->nullable();
-            $table->string('phone');
             $table->string('avatar')->nullable();
             $table->float('average_rate')->nullable();
-            $table->boolean('status');
             $table->bigInteger('user_id');
             $table->double('account_balance')->nullable();
             $table->timestamps();

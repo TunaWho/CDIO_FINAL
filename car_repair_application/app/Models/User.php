@@ -41,17 +41,17 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne(Role::class, 'role_id', 'id');
+        return $this->hasOne(Role::class, 'id');
     }
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class, 'user_id', 'id');
+        return $this->belongsTo(Admin::class, 'id', 'user_id');
     }
 
     public function partner()
     {
-        return $this->belongsTo(Partner::class, 'user_id', 'id');
+        return $this->belongsTo(Partner::class, 'id', 'user_id');
     }
 
     public function customer()

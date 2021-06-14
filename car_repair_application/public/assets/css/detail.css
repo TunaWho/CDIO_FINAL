@@ -358,3 +358,18 @@ footer .footermenu li {
 .footerinfo .text-red {
     color: #df2431;
 }
+
+.account {
+  display: flex;
+  padding-bottom: 30px;
+}
+.images_acount img {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 5px;
+}
+.info {
+  margin-top: 20px;
+  padding-left: 40px;
+}
